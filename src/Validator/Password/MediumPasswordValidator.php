@@ -1,10 +1,11 @@
 <?php
 
-namespace School\Validator;
+namespace School\Validator\Password;
 
 use School\Dto\RegisterUserDto;
+use School\Validator\ValidatorInterface;
 
-class MediumPasswordValidator
+class MediumPasswordValidator implements ValidatorInterface
 {
     private string $mediumPasswordPattern;
 
@@ -14,8 +15,8 @@ class MediumPasswordValidator
         $this->mediumPasswordPattern = '/^((?!.*[\s])(?=.*[A-Z]).{8,})$/';
     }
 
-    public function validate(RegisterUserDto $newUser): bool
+    public function validate(RegisterUserDto $dto): bool
     {
-        return preg_match($this->mediumPasswordPattern, $newUser->password);
+        return preg_match($this->mediumPasswordPattern, $dto->password);
     }
 }

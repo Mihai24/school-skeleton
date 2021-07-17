@@ -1,10 +1,10 @@
 <?php
 
-namespace School\Validator;
+namespace School\Validator\Password;
 
 use School\Dto\RegisterUserDto;
 
-class StrongPasswordValidator
+class StrongPasswordValidator implements ValidatorInterface
 {
     private string $strongPasswordPattern;
 
@@ -14,8 +14,8 @@ class StrongPasswordValidator
         $this->strongPasswordPattern = '/^((?!.*[\s])(?=.*[A-Z])(?=.*\W).{10,})$/';
     }
 
-    public function validate(RegisterUserDto $newUser): bool
+    public function validate(RegisterUserDto $dto): bool
     {
-        return preg_match($this->strongPasswordPattern, $newUser->password);
+        return preg_match($this->strongPasswordPattern, $dto->password);
     }
 }
