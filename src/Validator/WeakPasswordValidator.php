@@ -11,7 +11,7 @@ class WeakPasswordValidator
     public function __construct()
     {
         //spaces are note allowed for password
-        $this->weakPasswordPattern = '/^(\S{6,})$/';
+        $this->weakPasswordPattern = '/^((?!.*[\s]).{6,})$/';
     }
 
     public function validate(RegisterUserDto $newUser): bool

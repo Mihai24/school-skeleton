@@ -11,7 +11,7 @@ class MediumPasswordValidator
     public function __construct()
     {
         //spaces are note allowed for password
-        $this->mediumPasswordPattern = '[A-Z]{1}+(\S{6,})';
+        $this->mediumPasswordPattern = '/^((?!.*[\s])(?=.*[A-Z]).{8,})$/';
     }
 
     public function validate(RegisterUserDto $newUser): bool
