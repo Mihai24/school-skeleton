@@ -14,7 +14,17 @@ class RegisterUserDto
 
     public static function createFromGlobals(): RegisterUserDto {
         //implement the creation from globals
-        return new self();
+        $newUser = new self();
+        $newUser->schoolIdentifier = $_POST['schoolIdentifier'];
+        $newUser->email = $_POST['email'];
+        $newUser->firstName = $_POST['firstName'];
+        $newUser->lastName = $_POST['lastName'];
+        $newUser->confirmPassword = $_POST['confirmedPassword'];
+        $newUser->password = $_POST['password'];
+        $newUser->entryDate = $_POST['entryDate'];
+        $newUser->startDate = $_POST['startDate'];
+
+        return $newUser;
     }
 
 }
