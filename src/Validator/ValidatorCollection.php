@@ -3,43 +3,60 @@ namespace School\Validator;
 
 class ValidatorCollection implements \Iterator, \Countable
 {
+    private array $validators;
+
+    public function __construct(array $validators)
+    {
+        $this->validators = $validators;
+    }
+
     public function addValidator(ValidatorInterface $validator): self
     {
+        array_push($this->validators, $validator);
 
+        return new ValidatorCollection($this->validators);
     }
 
     public function removeValidator(ValidatorInterface $validator): self
     {
+        foreach ($this->validators as $checkValidator)
+        {
+            if ($checkValidator === $validator)
+            {
+                unset($validator, $this->validators);
+            }
+        }
 
+        return new ValidatorCollection($this->validators);
     }
 
     public function current()
     {
-        // TODO: Implement current() method.
+        return $this->current($this->validators);
     }
 
-    public function next()
+    public function next(): void
     {
-        // TODO: Implement next() method.
+        $this->next($this->validators);
     }
 
     public function key()
     {
-        // TODO: Implement key() method.
+        return $this->key($this->validators);
     }
 
-    public function valid()
+    public function valid(): bool
     {
-        // TODO: Implement valid() method.
+        return $this->valid($this->validators);
     }
 
-    public function rewind()
+    public function rewind(): void
     {
-        // TODO: Implement rewind() method.
+        $this->rewind($this->validators);
     }
 
-    public function count()
+    public function count(): int
     {
-        // TODO: Implement count() method.
+        return count($this->validators);
     }
 }

@@ -8,10 +8,12 @@ use School\Validator\ValidatorInterface;
 class TeacherEmail implements ValidatorInterface
 {
     private string $teacherEmailPattern;
+    private array $configuration;
 
-    public function __construct()
+    public function __construct(array $configuration)
     {
-        $this->teacherEmailPattern = 'sda';
+        $this->configuration = $configuration;
+        $this->teacherEmailPattern = '^[a-zA-Z0-9.-]+@('. $this->configuration['SCHOOL_PROVIDER_REGEX'] .')\.com$';
     }
 
     public function validate(RegisterUserDto $dto): bool
