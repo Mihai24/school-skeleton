@@ -5,16 +5,16 @@ class ValidatorCollection implements \Iterator, \Countable
 {
     private array $validators;
 
-    public function __construct(array $validators)
+    public function __construct()
     {
-        $this->validators = $validators;
+        $this->validators = [];
     }
 
     public function addValidator(ValidatorInterface $validator): self
     {
         array_push($this->validators, $validator);
 
-        return new ValidatorCollection($this->validators);
+        return new ValidatorCollection();
     }
 
     public function removeValidator(ValidatorInterface $validator): self
